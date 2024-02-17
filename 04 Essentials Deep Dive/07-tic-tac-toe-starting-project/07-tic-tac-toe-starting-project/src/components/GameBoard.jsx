@@ -6,11 +6,11 @@ const initialGameBoard = [
 
 export default function GameBoard({ onSelectSquare, turns }) {
   let gameBoard = initialGameBoard;
-
+  // console.log(turns, gameBoard);
   for (const turn of turns) {
     const { square, player } = turn;
     const { row, col } = square;
-
+  
     gameBoard[row][col] = player; //here player is a symbol
   }
 

@@ -4,7 +4,7 @@ import { Header } from "./Header.jsx";
 import TabButton from "./TabButton.jsx";
 import { EXAMPLES } from "./data.js";
 function App() {
-  const [selectedTopic, setSelectedTopic] = useState("components");
+  const [selectedTopic, setSelectedTopic] = useState();
 
   function handleSelect(selectedButton) {
     setSelectedTopic(selectedButton);
@@ -31,6 +31,7 @@ function App() {
             <TabButton onSelect={() => handleSelect("state")}>State</TabButton> */}
             {Object.keys(EXAMPLES).map((key) => (
               <TabButton
+                isSelected={key === selectedTopic}
                 key={key}
                 onSelect={() => {
                   handleSelect(key);
@@ -40,13 +41,15 @@ function App() {
               </TabButton>
             ))}
           </menu>
-          <div id="tab-content">
-            <h3>{EXAMPLES[selectedTopic].title}</h3>
-            <p>{EXAMPLES[selectedTopic].description}</p>
-            <pre>
-              <code>{EXAMPLES[selectedTopic].code}</code>
-            </pre>
-          </div>
+          {selectedTopic && (
+            <div id="tab-content">
+              <h3>{EXAMPLES[selectedTopic].title}</h3>
+              <p>{EXAMPLES[selectedTopic].description}</p>
+              <pre>
+                <code>{EXAMPLES[selectedTopic].code}</code>
+              </pre>
+            </div>
+          )}
         </section>
 
         <h2>Time to get started!</h2>
